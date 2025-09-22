@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-ray Lab Assistant Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #F9FAFC; margin: 0; padding: 20px; }
+        header { background: linear-gradient(135deg, #BBDEFB, #E3F2FD); padding: 20px; text-align: center; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        h1 { color: #1E88E5; margin: 0; font-size: 24px; }
+        .dashboard-card { background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 25px; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #FFF; }
+        th, td { border: 1px solid #E3F2FD; padding: 12px; text-align: left; }
+        th { background-color: #E3F2FD; color: #1E88E5; font-weight: 600; }
+        td { color: #424242; }
+        .upload-btn {
+            background-color: #1E88E5;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .upload-btn:hover { background-color: #1565C0; }
+        .no-requests { text-align: center; color: #757575; font-style: italic; padding: 40px; border: 2px dashed #E3F2FD; border-radius: 5px; }
+        .logout { float: right; background-color: #E57373; color: #FFF; border: none; padding: 8px 16px; cursor: pointer; border-radius: 5px; transition: background-color 0.3s; }
+        .logout:hover { background-color: #EF5350; }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #E57373;
+            color: #FFF;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .close-btn:hover { background-color: #EF5350; }
+        .file-drop { border: 2px dashed #E3F2FD; padding: 20px; text-align: center; margin: 15px 0; background-color: #F5FBFF; border-radius: 5px; transition: all 0.3s; position: relative; }
+        .file-drop.dragover { background-color: #BBDEFB; border-color: #1E88E5; }
+        .file-drop.success { background-color: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
+        .file-drop.error { background-color: #FFEBEE; border-color: #EF5350; color: #D32F2F; }
+        input[type="file"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #E3F2FD; border-radius: 5px; font-size: 14px; }
+        textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #E3F2FD; border-radius: 5px; resize: vertical; }
+        button[type="submit"], button[type="button"] { background-color: #1E88E5; color: #FFF; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; transition: background-color 0.3s; margin: 5px; }
+        button[type="submit"]:hover, button[type="button"]:hover { background-color: #1565C0; }
+        button:disabled { background-color: #B0BEC5; cursor: not-allowed; }
+        .error { color: #EF5350; font-size: 14px; margin: 5px 0; display: none; }
+        .success { color: #4CAF50; text-align: center; padding: 10px; background-color: #E8F5E9; border-radius: 5px; display: none; margin: 10px 0; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>X-ray Lab Assistant Dashboard</h1>
+    <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="dashboard-card">
+    <h2>Pending X-ray Requests</h2>
+    <div id="requests-container">
+        <!-- Dynamic content via JS -->
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="uploadModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">Close</button>
+        <h2 id="modalPatientInfo" style="color: #424242;">Patient: Loading...</h2>
+        <form id="uploadForm" onsubmit="handleUpload(event)">
+            <div class="file-drop" id="modalFileDrop">
+                <p>Drag & drop X-ray image here or <button class="upload-btn" type="button" onclick="document.getElementById('modalFileInput').click()">Upload Image</button></p>
+                <input type="file" id="modalFileInput" accept="image/*,.dcm" onchange="handleModalFileSelect(event)" style="display: none;">
+                <p style="color: #757575;">Max size: 10MB | Formats: JPG, PNG, DICOM</p>
+            </div>
+            <div class="error" id="modalErrorMsg"></div>
+            <label for="modalNotes" style="color: #424242;">Optional Notes:</label>
+            <textarea id="modalNotes" rows="4" placeholder="Add any notes about the X-ray..."></textarea>
+            <button type="submit" id="modalSubmitBtn" disabled>Upload & Link to Record</button>
+            <button type="button" onclick="resetModalForm()">Cancel</button>
+            <div class="success" id="modalSuccessMsg"></div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const pendingRequests = [
+        { id: 'REQ-001', patientName: 'John Doe', patientId: 'PAT-123', date: '2025-09-15', dentist: 'Dr. Smith', status: 'Pending', note: 'Please prioritize this urgent case.' },
+        { id: 'REQ-002', patientName: 'Jane Smith', patientId: 'PAT-456', date: '2025-09-16', dentist: 'Dr. Lee', status: 'Pending', note: 'Standard follow-up X-ray needed.' }
+    ];
+
+    function renderRequests() {
+        const container = document.getElementById('requests-container');
+        if (pendingRequests.length === 0) {
+            container.innerHTML = '<div class="no-requests">No pending requests available.</div>';
+            return;
+        }
+
+        let tableHTML = '<table><thead><tr><th>Patient Name</th><th>Request ID</th><th>Date</th><th>Dentist</th><th>Status</th><th>Doctor\'s Note</th><th>Action</th></tr></thead><tbody>';
+        pendingRequests.forEach(req => {
+            tableHTML += `<tr>
+                    <td>${req.patientName}</td>
+                    <td>${req.id}</td>
+                    <td>${req.date}</td>
+                    <td>${req.dentist}</td>
+                    <td>${req.status}</td>
+                    <td>${req.note || 'No note provided'}</td>
+                    <td><button class="upload-btn" onclick="openModal('${req.id}', '${req.patientName}', '${req.patientId}')">Upload X-ray</button></td>
+                </tr>`;
+        });
+        tableHTML += '</tbody></table>';
+        container.innerHTML = tableHTML;
+    }
+
+    function openModal(requestId, patientName, patientId) {
+        const modal = document.getElementById('uploadModal');
+        document.getElementById('modalPatientInfo').textContent = `Patient: ${patientName} (ID: ${patientId}) | Request: ${requestId}`;
+        modal.style.display = 'flex';
+        resetModalForm();
+
+        const fileDrop = document.getElementById('modalFileDrop');
+        fileDrop.ondragover = (e) => { e.preventDefault(); fileDrop.classList.add('dragover'); };
+        fileDrop.ondragleave = () => fileDrop.classList.remove('dragover');
+        fileDrop.ondrop = (e) => {
+            e.preventDefault();
+            fileDrop.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                const input = document.getElementById('modalFileInput');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+                handleModalFileSelect({ target: input });
+            }
+        };
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('uploadModal');
+        modal.style.display = 'none';
+        resetModalForm();
+    }
+
+    let selectedFile = null;
+    const maxSize = 10 * 1024 * 1024;
+
+    function handleModalFileSelect(event) {
+        selectedFile = event.target.files[0];
+        const errorEl = document.getElementById('modalErrorMsg');
+        const submitBtn = document.getElementById('modalSubmitBtn');
+
+        if (!selectedFile) return;
+
+        const validTypes = ['image/jpeg', 'image/png'];
+        const fileExt = selectedFile.name.toLowerCase().slice(selectedFile.name.lastIndexOf('.'));
+        if (!validTypes.includes(selectedFile.type) && !['.jpg', '.jpeg', '.png', '.dcm'].includes(fileExt)) {
+            showModalError('Invalid file type. Please use JPG, PNG, or DICOM.');
+            return;
+        }
+        if (selectedFile.size > maxSize) {
+            showModalError('File too large. Max 10MB.');
+            return;
+        }
+
+        errorEl.style.display = 'none';
+        submitBtn.disabled = false;
+        document.getElementById('modalFileDrop').textContent = `Selected: ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)}MB)`;
+    }
+
+    function showModalError(msg) {
+        const errorEl = document.getElementById('modalErrorMsg');
+        errorEl.textContent = msg;
+        errorEl.style.display = 'block';
+        document.getElementById('modalSubmitBtn').disabled = true;
+    }
+
+    function resetModalForm() {
+        document.getElementById('uploadForm').reset();
+        selectedFile = null;
+        document.getElementById('modalSubmitBtn').disabled = true;
+        document.getElementById('modalErrorMsg').style.display = 'none';
+        document.getElementById('modalSuccessMsg').style.display = 'none';
+        const fileDrop = document.getElementById('modalFileDrop');
+        fileDrop.innerHTML = `<p>Drag & drop X-ray image here or <button class="upload-btn" type="button" onclick="document.getElementById('modalFileInput').click()">Upload Image</button></p>
+                <input type="file" id="modalFileInput" accept="image/*,.dcm" onchange="handleModalFileSelect(event)" style="display: none;">
+                <p style="color: #757575;">Max size: 10MB | Formats: JPG, PNG, DICOM</p>`;
+    }
+
+    async function handleUpload(event) {
+        event.preventDefault();
+        if (!selectedFile) {
+            showModalError('Please select a file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        const patientId = document.getElementById('modalPatientInfo').textContent.match(/ID: (\w+)/)[1];
+        const requestId = document.getElementById('modalPatientInfo').textContent.match(/Request: (\w+)/)[1];
+        formData.append('requestId', requestId);
+        formData.append('patientId', patientId);
+        formData.append('notes', document.getElementById('modalNotes').value);
+
+        try {
+            // Temporary mock response for testing (remove when backend is ready)
+            if (!window.location.href.includes('localhost')) {
+                const mockResponse = { success: true };
+                document.getElementById('modalSuccessMsg').textContent = 'X-ray uploaded and linked successfully! Dentist notified.';
+                document.getElementById('modalSuccessMsg').style.display = 'block';
+                const row = document.querySelector(`button[onclick*="openModal('${requestId}'"]`).closest('tr');
+                row.cells[4].textContent = 'Processed';
+                setTimeout(closeModal, 2000);
+                return;
+            }
+
+            const response = await fetch('/api/upload-xray', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            document.getElementById('modalSuccessMsg').textContent = 'X-ray uploaded and linked successfully! Dentist notified.';
+            document.getElementById('modalSuccessMsg').style.display = 'block';
+            const row = document.querySelector(`button[onclick*="openModal('${requestId}'"]`).closest('tr');
+            row.cells[4].textContent = 'Processed';
+            setTimeout(closeModal, 2000);
+        } catch (err) {
+            console.error('Upload error:', err); // Log error for debugging
+            showModalError(`Upload failed. Please retry. ${err.message}`);
+        }
+    }
+
+    function logout() {
+        window.location.href = 'login.html';
+    }
+
+    renderRequests();
+</script>
+</body>
+</html>
