@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Appointment Booking - SmileCare Clinic</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#06b6d4'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+        .error-message {
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .success-check {
+            animation: checkmark 0.5s ease;
+        }
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .loading {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<div class="min-h-screen py-8 px-4">
+    <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 flex items-center justify-center bg-primary text-white rounded-full mx-auto mb-4">
+                <i class="ri-tooth-line ri-2x"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Book Your Dental Appointment</h1>
+            <p class="text-gray-600">Schedule your visit with our experienced dental professionals</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <form id="appointmentForm" novalidate="">
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Patient Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label for="patientName" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Full Name <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="text" id="patientName" name="patientName" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Enter your full name">
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden" id="nameCheck">
+                                        <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line success-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-500 text-sm mt-1 hidden" id="nameError"></div>
+                            </div>
+
+                            <div>
+                                <label for="age" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Age <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="number" id="age" name="age" min="1" max="120" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Enter your age">
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden" id="ageCheck">
+                                        <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line success-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-500 text-sm mt-1 hidden" id="ageError"></div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Gender <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <button type="button" id="genderSelect" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-left bg-white flex items-center justify-between">
+                                        <span id="genderSelectedText" class="text-gray-900">Male</span>
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </div>
+                                    </button>
+                                    <div id="genderDropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
+                                        <div class="py-1">
+                                            <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-gender="male">Male</div>
+                                            <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-gender="female">Female</div>
+                                            <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-gender="other">Other</div>
+                                        </div>
+                                    </div>
+                                    <div class="absolute right-12 top-1/2 transform -translate-y-1/2 hidden" id="genderCheck">
+                                        <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line success-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-500 text-sm mt-1 hidden" id="genderError"></div>
+                            </div>
+
+                            <div>
+                                <label for="contactNumber" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Contact Number <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="tel" id="contactNumber" name="contactNumber" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="+1 (555) 123-4567">
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden" id="phoneCheck">
+                                        <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line success-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-500 text-sm mt-1 hidden" id="phoneError"></div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email Address <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="your.email@example.com">
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden" id="emailCheck">
+                                        <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line success-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-500 text-sm mt-1 hidden" id="emailError"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Appointment Details</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="doctorSelect" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Select Doctor <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <button type="button" id="doctorSelect" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-left bg-white flex items-center justify-between">
+                                        <span id="doctorSelectedText" class="text-gray-900">Dr. Sarah Johnson (General Dentistry)</span>
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </div>
+                                    </button>
+                                    <div id="doctorDropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
+                                        <div class="py-1">
+                                            <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100" data-doctor-id="D001" data-doctor-name="Dr. Sarah Johnson" data-specialization="General Dentistry">
+                                                <div class="font-medium text-gray-900">Dr. Sarah Johnson</div>
+                                                <div class="text-sm text-gray-500">ID: D001 • General Dentistry</div>
+                                            </div>
+                                            <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100" data-doctor-id="D002" data-doctor-name="Dr. Michael Chen" data-specialization="Orthodontics">
+                                                <div class="font-medium text-gray-900">Dr. Michael Chen</div>
+                                                <div class="text-sm text-gray-500">ID: D002 • Orthodontics</div>
+                                            </div>
+                                            <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100" data-doctor-id="D003" data-doctor-name="Dr. Emily Rodriguez" data-specialization="Pediatric Dentistry">
+                                                <div class="font-medium text-gray-900">Dr. Emily Rodriguez</div>
+                                                <div class="text-sm text-gray-500">ID: D003 • Pediatric Dentistry</div>
+                                            </div>
+                                            <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100" data-doctor-id="D004" data-doctor-name="Dr. James Wilson" data-specialization="Oral Surgery">
+                                                <div class="font-medium text-gray-900">Dr. James Wilson</div>
+                                                <div class="text-sm text-gray-500">ID: D004 • Oral Surgery</div>
+                                            </div>
+                                            <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer" data-doctor-id="D005" data-doctor-name="Dr. Lisa Thompson" data-specialization="Periodontics">
+                                                <div class="font-medium text-gray-900">Dr. Lisa Thompson</div>
+                                                <div class="text-sm text-gray-500">ID: D005 • Periodontics</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="absolute right-12 top-1/2 transform -translate-y-1/2 hidden" id="doctorCheck">
+                                        <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line success-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error-message text-red-500 text-sm mt-1 hidden" id="doctorError"></div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="preferredDate" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Preferred Date <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <input type="date" id="preferredDate" name="preferredDate" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden" id="dateCheck">
+                                            <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                                <i class="ri-check-line success-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="error-message text-red-500 text-sm mt-1 hidden" id="dateError"></div>
+                                    <div class="text-xs text-gray-500 mt-1">Minimum 1 day advance booking required</div>
+                                </div>
+
+                                <div>
+                                    <label for="preferredTime" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Preferred Time <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <button type="button" id="preferredTime" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-left bg-white flex items-center justify-between">
+                                            <span id="timeSelectedText" class="text-gray-900">10:00 AM</span>
+                                            <div class="w-5 h-5 flex items-center justify-center">
+                                                <i class="ri-arrow-down-s-line"></i>
+                                            </div>
+                                        </button>
+                                        <div id="timeDropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-48 overflow-y-auto hidden">
+                                            <div class="py-1">
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="09:00">9:00 AM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="09:30">9:30 AM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="10:00">10:00 AM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="10:30">10:30 AM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="11:00">11:00 AM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="11:30">11:30 AM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="14:00">2:00 PM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="14:30">2:30 PM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="15:00">3:00 PM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="15:30">3:30 PM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="16:00">4:00 PM</div>
+                                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer" data-time="16:30">4:30 PM</div>
+                                            </div>
+                                        </div>
+                                        <div class="absolute right-12 top-1/2 transform -translate-y-1/2 hidden" id="timeCheck">
+                                            <div class="w-5 h-5 flex items-center justify-center text-green-500">
+                                                <i class="ri-check-line success-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="error-message text-red-500 text-sm mt-1 hidden" id="timeError"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="appointmentNotes" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Appointment Notes <span class="text-gray-400">(Optional)</span>
+                                </label>
+                                <textarea id="appointmentNotes" name="appointmentNotes" rows="4" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none" placeholder="Please describe your symptoms or reason for visit..."></textarea>
+                                <div class="text-xs text-gray-500 mt-1">
+                                    <span id="noteCount">0</span>/500 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 flex items-center justify-center text-blue-600 mt-0.5">
+                                <i class="ri-information-line"></i>
+                            </div>
+                            <div class="text-sm text-blue-800">
+                                <p class="font-medium mb-1">Important Information:</p>
+                                <ul class="space-y-1 text-blue-700">
+                                    <li>• Appointments must be booked at least 1 day in advance</li>
+                                    <li>• Maximum 30 appointments per day (some dates may be unavailable)</li>
+                                    <li>• Please arrive 15 minutes early for your appointment</li>
+                                    <li>• Bring a valid ID and insurance information</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <button type="submit" id="submitBtn" class="!rounded-button whitespace-nowrap w-full bg-primary text-white py-4 px-6 font-semibold hover:bg-blue-600 transition-colors cursor-pointer">
+                            <span id="submitText">Book Appointment</span>
+                            <div class="loading w-5 h-5 border-2 border-white border-t-transparent rounded-full mx-auto hidden"></div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="successMessage" class="bg-white rounded-xl shadow-lg p-8 mt-8 hidden">
+            <div class="text-center">
+                <div class="w-16 h-16 flex items-center justify-center bg-green-500 text-white rounded-full mx-auto mb-4">
+                    <i class="ri-check-line ri-2x"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Appointment Booked Successfully!</h2>
+                <p class="text-gray-600 mb-6">Your appointment has been confirmed. You will receive a confirmation email shortly.</p>
+                <div class="bg-gray-50 rounded-lg p-6 text-left">
+                    <h3 class="font-semibold text-gray-900 mb-3">Appointment Details:</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Patient:</span>
+                            <span class="font-medium" id="confirmName"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Doctor:</span>
+                            <span class="font-medium" id="confirmDoctor"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Date & Time:</span>
+                            <span class="font-medium" id="confirmDateTime"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Contact:</span>
+                            <span class="font-medium" id="confirmContact"></span>
+                        </div>
+                    </div>
+                </div>
+                <a href="index.html#home">
+                    <button type="button" class="!rounded-button whitespace-nowrap mt-6 bg-primary text-white py-3 px-8 font-semibold hover:bg-blue-600 transition-colors">Close</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('appointmentForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+
+        // Form validation fields
+        const fields = {
+            patientName: {
+                element: document.getElementById('patientName'),
+                check: document.getElementById('nameCheck'),
+                error: document.getElementById('nameError'),
+                validate: (value) => {
+                    if (!value.trim()) return 'Full name is required';
+                    if (value.trim().length < 2) return 'Name must be at least 2 characters';
+                    if (!/^[a-zA-Z\s]+$/.test(value)) return 'Name can only contain letters and spaces';
+                    return null;
+                }
+            },
+            age: {
+                element: document.getElementById('age'),
+                check: document.getElementById('ageCheck'),
+                error: document.getElementById('ageError'),
+                validate: (value) => {
+                    if (!value) return 'Age is required';
+                    if (value < 1 || value > 120) return 'Please enter a valid age between 1 and 120';
+                    return null;
+                }
+            },
+            contactNumber: {
+                element: document.getElementById('contactNumber'),
+                check: document.getElementById('phoneCheck'),
+                error: document.getElementById('phoneError'),
+                validate: (value) => {
+                    if (!value.trim()) return 'Contact number is required';
+                    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                    if (!phoneRegex.test(value.replace(/[\s\-\(\)]/g, ''))) return 'Please enter a valid phone number';
+                    return null;
+                }
+            },
+            email: {
+                element: document.getElementById('email'),
+                check: document.getElementById('emailCheck'),
+                error: document.getElementById('emailError'),
+                validate: (value) => {
+                    if (!value.trim()) return 'Email address is required';
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) return 'Please enter a valid email address';
+                    return null;
+                }
+            },
+            preferredDate: {
+                element: document.getElementById('preferredDate'),
+                check: document.getElementById('dateCheck'),
+                error: document.getElementById('dateError'),
+                validate: (value) => {
+                    if (!value) return 'Preferred date is required';
+                    const selectedDate = new Date(value);
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    const maxDate = new Date();
+                    maxDate.setDate(maxDate.getDate() + 30);
+                    if (selectedDate < tomorrow) return 'Appointment must be at least 1 day in advance';
+                    if (selectedDate > maxDate) return 'Appointments can only be booked up to 30 days in advance';
+                    return null;
+                }
+            }
+        };
+
+        let selectedDoctor = "Dr. Sarah Johnson (General Dentistry)";
+        let selectedTime = "10:00 AM";
+        let selectedGender = "male";
+
+        // Gender dropdown functionality
+        const genderSelect = document.getElementById('genderSelect');
+        const genderDropdown = document.getElementById('genderDropdown');
+        const genderSelectedText = document.getElementById('genderSelectedText');
+
+        genderSelect.addEventListener('click', function() {
+            genderDropdown.classList.toggle('hidden');
+        });
+
+        genderDropdown.addEventListener('click', function(e) {
+            const option = e.target.closest('[data-gender]');
+            if (option) {
+                selectedGender = option.dataset.gender;
+                genderSelectedText.textContent = option.textContent;
+                genderSelectedText.classList.remove('text-gray-500');
+                genderSelectedText.classList.add('text-gray-900');
+                genderDropdown.classList.add('hidden');
+                document.getElementById('genderCheck').classList.remove('hidden');
+                document.getElementById('genderError').classList.add('hidden');
+                validateCustomFields();
+            }
+        });
+
+        // Doctor dropdown functionality
+        const doctorSelect = document.getElementById('doctorSelect');
+        const doctorDropdown = document.getElementById('doctorDropdown');
+        const doctorSelectedText = document.getElementById('doctorSelectedText');
+
+        doctorSelect.addEventListener('click', function() {
+            doctorDropdown.classList.toggle('hidden');
+            timeDropdown.classList.add('hidden');
+        });
+
+        doctorDropdown.addEventListener('click', function(e) {
+            const option = e.target.closest('[data-doctor-id]');
+            if (option) {
+                const doctorId = option.dataset.doctorId;
+                const doctorName = option.dataset.doctorName;
+                const specialization = option.dataset.specialization;
+                selectedDoctor = `${doctorName} (${specialization})`;
+                doctorSelectedText.textContent = selectedDoctor;
+                doctorSelectedText.classList.remove('text-gray-500');
+                doctorSelectedText.classList.add('text-gray-900');
+                doctorDropdown.classList.add('hidden');
+                document.getElementById('doctorCheck').classList.remove('hidden');
+                document.getElementById('doctorError').classList.add('hidden');
+                validateCustomFields();
+            }
+        });
+
+        // Time dropdown functionality
+        const timeSelect = document.getElementById('preferredTime');
+        const timeDropdown = document.getElementById('timeDropdown');
+        const timeSelectedText = document.getElementById('timeSelectedText');
+
+        timeSelect.addEventListener('click', function() {
+            timeDropdown.classList.toggle('hidden');
+            doctorDropdown.classList.add('hidden');
+        });
+
+        timeDropdown.addEventListener('click', function(e) {
+            const option = e.target.closest('[data-time]');
+            if (option) {
+                selectedTime = option.textContent;
+                timeSelectedText.textContent = selectedTime;
+                timeSelectedText.classList.remove('text-gray-500');
+                timeSelectedText.classList.add('text-gray-900');
+                timeDropdown.classList.add('hidden');
+                document.getElementById('timeCheck').classList.remove('hidden');
+                document.getElementById('timeError').classList.add('hidden');
+                validateCustomFields();
+            }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!genderSelect.contains(e.target)) {
+                genderDropdown.classList.add('hidden');
+            }
+            if (!doctorSelect.contains(e.target)) {
+                doctorDropdown.classList.add('hidden');
+            }
+            if (!timeSelect.contains(e.target)) {
+                timeDropdown.classList.add('hidden');
+            }
+        });
+
+        // Character counter for notes
+        const notesTextarea = document.getElementById('appointmentNotes');
+        const noteCount = document.getElementById('noteCount');
+        const maxLength = 500;
+
+        notesTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            noteCount.textContent = currentLength;
+
+            if (currentLength > maxLength) {
+                this.value = this.value.substring(0, maxLength);
+                noteCount.textContent = maxLength;
+            }
+
+            if (currentLength > maxLength * 0.9) {
+                noteCount.classList.add('text-red-500');
+            } else {
+                noteCount.classList.remove('text-red-500');
+            }
+        });
+
+        // Set date constraints
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const maxDate = new Date(today);
+        maxDate.setDate(maxDate.getDate() + 30);
+
+        document.getElementById('preferredDate').min = tomorrow.toISOString().split('T')[0];
+        document.getElementById('preferredDate').max = maxDate.toISOString().split('T')[0];
+
+        // Field validation function
+        function validateField(fieldName) {
+            const field = fields[fieldName];
+            if (!field) return true;
+
+            const value = field.element.value;
+            const error = field.validate(value);
+
+            if (error) {
+                field.error.textContent = error;
+                field.error.classList.remove('hidden');
+                field.check.classList.add('hidden');
+                field.element.classList.add('border-red-500');
+                return false;
+            } else {
+                field.error.classList.add('hidden');
+                field.check.classList.remove('hidden');
+                field.element.classList.remove('border-red-500');
+                return true;
+            }
+        }
+
+        // Custom fields validation
+        function validateCustomFields() {
+            let doctorValid = true;
+            let timeValid = true;
+            let genderValid = true;
+
+            if (!selectedGender) {
+                document.getElementById('genderError').textContent = 'Please select a gender';
+                document.getElementById('genderError').classList.remove('hidden');
+                document.getElementById('genderCheck').classList.add('hidden');
+                genderValid = false;
+            } else {
+                document.getElementById('genderError').classList.add('hidden');
+                document.getElementById('genderCheck').classList.remove('hidden');
+            }
+
+            if (!selectedDoctor) {
+                document.getElementById('doctorError').textContent = 'Please select a doctor';
+                document.getElementById('doctorError').classList.remove('hidden');
+                document.getElementById('doctorCheck').classList.add('hidden');
+                doctorValid = false;
+            } else {
+                document.getElementById('doctorError').classList.add('hidden');
+                document.getElementById('doctorCheck').classList.remove('hidden');
+            }
+
+            if (!selectedTime) {
+                document.getElementById('timeError').textContent = 'Please select a preferred time';
+                document.getElementById('timeError').classList.remove('hidden');
+                document.getElementById('timeCheck').classList.add('hidden');
+                timeValid = false;
+            } else {
+                document.getElementById('timeError').classList.add('hidden');
+                document.getElementById('timeCheck').classList.remove('hidden');
+            }
+
+            return doctorValid && timeValid && genderValid;
+        }
+
+        // Update submit button state
+        function updateSubmitButton() {
+            const allFieldsValid = Object.keys(fields).every(fieldName => validateField(fieldName));
+            const customFieldsValid = validateCustomFields();
+            const isValid = allFieldsValid && customFieldsValid;
+
+            if (isValid) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                submitBtn.classList.add('bg-primary', 'text-white', 'hover:bg-blue-600', 'cursor-pointer');
+                submitText.textContent = 'Book Appointment';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                submitBtn.classList.remove('bg-primary', 'text-white', 'hover:bg-blue-600', 'cursor-pointer');
+                submitText.textContent = 'Complete All Required Fields';
+            }
+        }
+
+        // Add event listeners to form fields
+        Object.keys(fields).forEach(fieldName => {
+            fields[fieldName].element.addEventListener('input', () => {
+                validateField(fieldName);
+                updateSubmitButton();
+            });
+
+            fields[fieldName].element.addEventListener('blur', () => {
+                validateField(fieldName);
+                updateSubmitButton();
+            });
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (submitBtn.disabled) return;
+
+            submitBtn.disabled = true;
+            submitText.textContent = '';
+            document.querySelector('.loading').classList.remove('hidden');
+
+            setTimeout(() => {
+                const formData = new FormData(form);
+                document.getElementById('confirmName').textContent = formData.get('patientName');
+                document.getElementById('confirmDoctor').textContent = selectedDoctor;
+                document.getElementById('confirmDateTime').textContent = `${formData.get('preferredDate')} at ${selectedTime}`;
+                document.getElementById('confirmContact').textContent = formData.get('contactNumber');
+
+                document.querySelector('.max-w-2xl').children[1].classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+            }, 2000);
+        });
+
+        // Initialize button state
+        updateSubmitButton();
+    });
+</script>
+</body>
+</html>

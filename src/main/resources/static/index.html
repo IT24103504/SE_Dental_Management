@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://readdy.link/share/4c684aff75fe8839278ea627bbebaf1e -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" crossorigin="anonymous" async="" src="./DentaCare - Professional Dental Clinic_files/array.js.download"></script><script src="./DentaCare - Professional Dental Clinic_files/e.js.download"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DentaCare - Professional Dental Clinic</title>
+  <script src="./DentaCare - Professional Dental Clinic_files/3.4.16"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./DentaCare - Professional Dental Clinic_files/css2" rel="stylesheet">
+  <link rel="stylesheet" href="./DentaCare - Professional Dental Clinic_files/remixicon.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0ea5e9',
+            secondary: '#06b6d4'
+          },
+          borderRadius: {
+            'none': '0px',
+            'sm': '4px',
+            DEFAULT: '8px',
+            'md': '12px',
+            'lg': '16px',
+            'xl': '20px',
+            '2xl': '24px',
+            '3xl': '32px',
+            'full': '9999px',
+            'button': '8px'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :where([class^="ri-"])::before {
+      content: "\f3c2";
+    }
+    .smooth-transition {
+      transition: all 0.3s ease;
+    }
+    .hero-bg {
+      background-image: url('https://readdy.ai/api/search-image?query=Modern%20dental%20clinic%20interior%20with%20comfortable%20patient%20chairs%2C%20bright%20lighting%2C%20clean%20white%20surfaces%2C%20professional%20medical%20equipment%2C%20welcoming%20atmosphere%20with%20soft%20blue%20accents%2C%20minimalist%20design%2C%20natural%20light%20streaming%20through%20windows%2C%20peaceful%20and%20sterile%20environment&width=1920&height=800&seq=hero-dental&orientation=landscape');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 50%, rgba(14,165,233,0.1) 100%);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.inset-y-0{top:0px;bottom:0px}.left-0{left:0px}.right-0{right:0px}.top-0{top:0px}.z-10{z-index:10}.z-50{z-index:50}.mx-4{margin-left:1rem;margin-right:1rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-2{margin-right:0.5rem}.mt-1{margin-top:0.25rem}.mt-12{margin-top:3rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-48{height:12rem}.h-64{height:16rem}.h-8{height:2rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-16{width:4rem}.w-8{width:2rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.cursor-pointer{cursor:pointer}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.whitespace-nowrap{white-space:nowrap}.\!rounded-button{border-radius:8px !important}.\!rounded-lg{border-radius:16px !important}.border{border-width:1px}.border-2{border-width:2px}.border-t{border-top-width:1px}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-primary{--tw-border-opacity:1;border-color:rgb(14 165 233 / var(--tw-border-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(14 165 233 / var(--tw-bg-opacity, 1))}.bg-primary\/10{background-color:rgb(14 165 233 / 0.1)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/95{background-color:rgb(255 255 255 / 0.95)}.object-cover{object-fit:cover}.object-top{object-position:top}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pr-10{padding-right:2.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-\[\'Pacifico\'\]{font-family:'Pacifico'}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(14 165 233 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-primary:hover{--tw-bg-opacity:1;background-color:rgb(14 165 233 / var(--tw-bg-opacity, 1))}.hover\:text-gray-600:hover{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(14 165 233 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.focus\:border-transparent:focus{border-color:transparent}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-primary:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(14 165 233 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}}@media (min-width: 768px){.md\:mt-0{margin-top:0px}.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}}@media (min-width: 1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style><link type="image/png" rel="icon" href="https://public.readdy.ai/gen_page/readdy-logo.png"><link rel="stylesheet" href="./DentaCare - Professional Dental Clinic_files/css2(1)"></head>
+<body class="bg-white">
+<!-- Header Navigation -->
+<nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <span class="font-['Pacifico'] text-2xl text-primary">SmileCare</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="text-gray-700 hover:text-primary smooth-transition">Home</a>
+        <a href="#services" class="text-gray-700 hover:text-primary smooth-transition">Services</a>
+        <a href="#doctors" class="text-gray-700 hover:text-primary smooth-transition">Doctors</a>
+        <!-- <a href="#" class="text-gray-700 hover:text-primary smooth-transition">Footer</a>  -->
+        <a href="#contact" class="text-gray-700 hover:text-primary smooth-transition">Contact</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="../templates/login.html" id="loginBtn" class="text-gray-700 hover:text-primary smooth-transition whitespace-nowrap !rounded-button">Login</a>
+        <!--   <button id="registerBtn" class="bg-gray-100 text-gray-700 px-4 py-2 hover:bg-gray-200 smooth-transition whitespace-nowrap !rounded-button">Register</button> -->
+        <!-- <button id="bookAppointmentBtn" class="bg-primary text-white px-6 py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">Book Appointment</button> -->
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Hero Section -->
+<section id="home" class="hero-bg min-h-screen flex items-center">
+  <div class="hero-overlay absolute inset-0"></div>
+  <div class="relative z-10 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl fade-in" style="animation-play-state: running;">
+        <h1 class="text-5xl font-bold text-gray-900 mb-6">Your Smile is Our Priority</h1>
+        <p class="text-xl text-gray-700 mb-8">Experience exceptional dental care with our team of expert dentists. We provide comprehensive dental services in a comfortable, modern environment.</p>
+        <div class="flex space-x-4">
+          <button  onclick="window.location.href='Appointment.html'" class="bg-primary text-white px-8 py-3 text-lg hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">Book Appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Dental Services</h2>
+      <p class="text-xl text-gray-600">Comprehensive dental care for all your oral health needs</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white p-8 shadow-lg card-hover fade-in stagger-1 !rounded-lg" style="animation-play-state: running;">
+        <div class="w-16 h-16 bg-primary/10 flex items-center justify-center mb-6 !rounded-lg">
+          <i class="ri-shield-check-line text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Preventive Care</h3>
+
+        <p class="text-gray-600 mb-4">Regular cleanings, check-ups, and preventive treatments to maintain optimal oral health.</p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>• Dental Cleanings</li>
+          <li>• Oral Examinations</li>
+          <li>• Fluoride Treatments</li>
+        </ul>
+      </div>
+      <div class="bg-white p-8 shadow-lg card-hover fade-in stagger-2 !rounded-lg" style="animation-play-state: running;">
+        <div class="w-16 h-16 bg-primary/10 flex items-center justify-center mb-6 !rounded-lg">
+          <i class="ri-star-line text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Cosmetic Dentistry</h3>
+        <p class="text-gray-600 mb-4">Enhance your smile with our advanced cosmetic dental procedures.</p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>• Teeth Whitening</li>
+          <li>• Porcelain Veneers</li>
+          <li>• Smile Makeovers</li>
+        </ul>
+      </div>
+      <div class="bg-white p-8 shadow-lg card-hover fade-in stagger-3 !rounded-lg" style="animation-play-state: running;">
+        <div class="w-16 h-16 bg-primary/10 flex items-center justify-center mb-6 !rounded-lg">
+          <i class="ri-tools-line text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Restorative Services</h3>
+        <p class="text-gray-600 mb-4">Restore damaged teeth with our comprehensive restorative treatments.</p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>• Dental Fillings</li>
+          <li>• Crowns &amp; Bridges</li>
+          <li>• Dental Implants</li>
+        </ul>
+      </div>
+      <div class="bg-white p-8 shadow-lg card-hover fade-in stagger-1 !rounded-lg" style="animation-play-state: running;">
+        <div class="w-16 h-16 bg-primary/10 flex items-center justify-center mb-6 !rounded-lg">
+          <i class="ri-align-center text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Orthodontics</h3>
+        <p class="text-gray-600 mb-4">Straighten your teeth with modern orthodontic solutions.</p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>• Traditional Braces</li>
+          <li>• Clear Aligners</li>
+          <li>• Retainers</li>
+        </ul>
+      </div>
+      <div class="bg-white p-8 shadow-lg card-hover fade-in stagger-2 !rounded-lg" style="animation-play-state: running;">
+        <div class="w-16 h-16 bg-primary/10 flex items-center justify-center mb-6 !rounded-lg">
+          <i class="ri-surgical-mask-line text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Oral Surgery</h3>
+        <p class="text-gray-600 mb-4">Advanced surgical procedures performed with precision and care.</p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>• Tooth Extractions</li>
+          <li>• Wisdom Teeth Removal</li>
+          <li>• Gum Surgery</li>
+        </ul>
+      </div>
+      <div class="bg-white p-8 shadow-lg card-hover fade-in stagger-3 !rounded-lg" style="animation-play-state: running;">
+        <div class="w-16 h-16 bg-primary/10 flex items-center justify-center mb-6 !rounded-lg">
+          <i class="ri-heart-pulse-line text-2xl text-primary"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Emergency Care</h3>
+        <p class="text-gray-600 mb-4">Immediate dental care for urgent situations and dental emergencies.</p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>• Emergency Appointments</li>
+          <li>• Pain Relief</li>
+          <li>• Urgent Repairs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Dental Disorders Section -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Common Dental Disorders</h2>
+      <p class="text-xl text-gray-600">Understanding and treating various dental conditions</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-1 !rounded-lg" style="animation-play-state: running;">
+        <img src="./image/Dis1.jpg" alt="Tooth Decay" class="w-full h-48 object-cover mb-6 !rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Tooth Decay &amp; Cavities</h3>
+        <p class="text-gray-600 mb-4">Dental caries or tooth decay occurs when bacteria form a film (plaque) on teeth and produce acid that erodes tooth enamel. Early signs include dark spots and sensitivity.</p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Regular brushing &amp; flossing</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Fluoride treatments</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Dental sealants</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-2 !rounded-lg" style="animation-play-state: running;">
+        <img src="./image/dis2.jpg" alt="Gum Disease" class="w-full h-48 object-cover mb-6 !rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Periodontal Disease</h3>
+        <p class="text-gray-600 mb-4">Gum disease begins with gingivitis and can progress to periodontitis. Symptoms include bleeding gums, recession, and loose teeth if left untreated.</p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Professional cleaning</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Scaling &amp; root planing</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Antibiotic treatment</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-3 !rounded-lg" style="animation-play-state: running;">
+        <img src="./image/dis3.jpg" alt="Tooth Sensitivity" class="w-full h-48 object-cover mb-6 !rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Tooth Sensitivity</h3>
+        <p class="text-gray-600 mb-4">Sensitivity occurs when tooth enamel wears down or gums recede, exposing dentin. Common triggers include hot, cold, sweet, and acidic substances.</p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Desensitizing toothpaste</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Fluoride treatments</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Bonding procedures</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-1 !rounded-lg" style="animation-play-state: running;">
+        <img src="./image/dis4.jpg" alt="Malocclusion" class="w-full h-48 object-cover mb-6 !rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Malocclusion</h3>
+        <p class="text-gray-600 mb-4">Misaligned teeth or incorrect bite relationships can cause difficulty in chewing, speaking, and maintaining oral hygiene. May lead to TMJ disorders.</p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Orthodontic braces</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Clear aligners</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Dental surgery</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-2 !rounded-lg" style="animation-play-state: running;">
+        <img src="./image/dis5.jpg" alt="Dental Abscess" class="w-full h-48 object-cover mb-6 !rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Dental Abscess</h3>
+        <p class="text-gray-600 mb-4">A severe infection that creates a pocket of pus in tooth or gum tissue. Causes severe pain, swelling, and fever. Requires immediate treatment.</p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Root canal therapy</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Antibiotics</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Drainage procedure</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-3 !rounded-lg" style="animation-play-state: running;">
+        <img src="./image/dis6.jpg" alt="Dental Trauma" class="w-full h-48 object-cover mb-6 !rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Dental Trauma</h3>
+        <p class="text-gray-600 mb-4">Injuries to teeth and surrounding tissues from accidents or impacts. Can include chips, cracks, displacement, or complete tooth loss.</p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Emergency care</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Dental bonding</li>
+          <li class="flex items-center"><i class="ri-checkbox-circle-line text-primary mr-2"></i>Crown placement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Doctors Section -->
+<section id="doctors" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Meet Our Expert Dentists</h2>
+      <p class="text-xl text-gray-600">Experienced professionals dedicated to your oral health</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-1 !rounded-lg" style="animation-play-state: running;">
+        <div class="relative mb-6">
+          <img src="./image/nilusha%2011.jpg" alt="Dr. Nilusha Sudharaka" class="w-full h-64 object-cover object-top !rounded-lg">
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr. Nilusha Sudharaka</h3>
+        <p class="text-primary font-medium mb-2">General Dentistry</p>
+        <p class="text-sm text-gray-600 mb-4">Metropolitan Dental Center</p>
+        <p class="text-sm text-gray-500 mb-4">15 years of experience in comprehensive dental care with a focus on patient comfort and preventive treatments.</p>
+        <button class="w-full bg-primary text-white py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">D0CTOR ID- 01</button>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-2 !rounded-lg" style="animation-play-state: running;">
+        <div class="relative mb-6">
+          <img src="./image/panke.jpg" alt="Dr. Pankaja Yunidu" class="w-full h-64 object-cover object-top !rounded-lg">
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr. Pankaja Yunidu</h3>
+        <p class="text-primary font-medium mb-2">Orthodontics</p>
+        <p class="text-sm text-gray-600 mb-4">Smile Specialists Clinic</p>
+        <p class="text-sm text-gray-500 mb-4">Specializing in braces and clear aligners with over 12 years of experience in creating beautiful smiles.</p>
+        <button class="w-full bg-primary text-white py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">D0CTOR ID- 02</button>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-3 !rounded-lg" style="animation-play-state: running;">
+        <div class="relative mb-6">
+          <img src="./image/nadara.jpg" alt="Dr. Nadara Wanigasekara" class="w-full h-64 object-cover object-top !rounded-lg">
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr. Nadara Wanigasekara</h3>
+        <p class="text-primary font-medium mb-2">Oral Surgery</p>
+        <p class="text-sm text-gray-600 mb-4">Advanced Dental Surgery Center</p>
+        <p class="text-sm text-gray-500 mb-4">Expert in complex oral surgeries and dental implants with 18 years of surgical experience.</p>
+        <button class="w-full bg-primary text-white py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">D0CTOR ID- 03</button>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-1 !rounded-lg" style="animation-play-state: paused;">
+        <div class="relative mb-6">
+          <img src="./image/vishwa%202.jpg" alt="Dr. Vishwa Nethsara" class="w-full h-64 object-cover object-top !rounded-lg">
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr. Vishwa Nethsara</h3>
+        <p class="text-primary font-medium mb-2">Cosmetic Dentistry</p>
+        <p class="text-sm text-gray-600 mb-4">Aesthetic Smile Studio</p>
+        <p class="text-sm text-gray-500 mb-4">Renowned for smile makeovers and aesthetic dental procedures with 14 years of cosmetic expertise.</p>
+        <button class="w-full bg-primary text-white py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">D0CTOR ID- 04</button>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-2 !rounded-lg" style="animation-play-state: paused;">
+        <div class="relative mb-6">
+          <img src="./image/Senan.jpg" alt="Dr. Thisuka Senan" class="w-full h-64 object-cover object-top !rounded-lg">
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr.Thisuka Senan</h3>
+        <p class="text-primary font-medium mb-2">Pediatric Dentistry</p>
+        <p class="text-sm text-gray-600 mb-4">Kids Dental Care Center</p>
+        <p class="text-sm text-gray-500 mb-4">Specializing in children's dental health with 10 years of experience in pediatric care.</p>
+        <button class="w-full bg-primary text-white py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">D0CTOR ID- 05</button>
+      </div>
+      <div class="bg-white p-6 shadow-lg card-hover fade-in stagger-3 !rounded-lg" style="animation-play-state: paused;">
+        <div class="relative mb-6">
+          <img src="./image/Amasha.jpg" alt="Dr. Amasha Sawandi" class="w-full h-64 object-cover object-top !rounded-lg">
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Dr. Amasha Sawandi</h3>
+        <p class="text-primary font-medium mb-2">Periodontics</p>
+        <p class="text-sm text-gray-600 mb-4">Gum Health Specialists</p>
+        <p class="text-sm text-gray-500 mb-4">Expert in gum disease treatment and prevention with 16 years of periodontal experience.</p>
+        <button class="w-full bg-primary text-white py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">D0CTOR ID- 06</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
+      <p class="text-xl text-gray-600">Get in touch with our friendly team</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="fade-in stagger-1" style="animation-play-state: paused;">
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send us a Message</h3>
+        <form class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+              <input type="text" class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-sm !rounded-lg">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+              <input type="text" class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-sm !rounded-lg">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input type="email" class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-sm !rounded-lg">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+            <input type="tel" class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-sm !rounded-lg">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-sm !rounded-lg"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-primary text-white py-3 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">Send Message</button>
+        </form>
+      </div>
+      <div class="fade-in stagger-2" style="animation-play-state: paused;">
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Visit Our Clinic</h3>
+        <div class="space-y-6">
+          <div class="flex items-start space-x-4">
+            <div class="w-8 h-8 bg-primary/10 flex items-center justify-center !rounded-lg">
+              <i class="ri-map-pin-line text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Address</h4>
+              <p class="text-gray-600">N0 : 123 Kandy Road<br> Malabe , Colombo District</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="w-8 h-8 bg-primary/10 flex items-center justify-center !rounded-lg">
+              <i class="ri-phone-line text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Phone</h4>
+              <p class="text-gray-600"> 011 225 6700</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="w-8 h-8 bg-primary/10 flex items-center justify-center !rounded-lg">
+              <i class="ri-mail-line text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Email</h4>
+              <p class="text-gray-600">info@smilecare.com</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="w-8 h-8 bg-primary/10 flex items-center justify-center !rounded-lg">
+              <i class="ri-time-line text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">Office Hours</h4>
+              <div class="text-gray-600 space-y-1">
+                <p>Monday - Friday: 10:00 AM - 8:00 PM</p>
+                <p>Saturday: 9:00 AM - 4:00 PM</p>
+                <p>Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 h-64 bg-gray-200 !rounded-lg overflow-hidden">
+          <div class="w-full h-full" style="background-image: url(&#39;https://public.readdy.ai/gen_page/map_placeholder_1280x720.png&#39;); background-size: cover; background-position: center;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <span class="font-[&#39;Pacifico&#39;] text-2xl text-primary">SmileCare</span>
+        <p class="text-gray-400 mt-4">Providing exceptional dental care with a focus on patient comfort and advanced treatment options.</p>
+        <div class="flex space-x-4 mt-6">
+          <div class="w-8 h-8 bg-gray-800 hover:bg-primary flex items-center justify-center !rounded-lg smooth-transition cursor-pointer">
+            <i class="ri-facebook-fill"></i>
+          </div>
+          <div class="w-8 h-8 bg-gray-800 hover:bg-primary flex items-center justify-center !rounded-lg smooth-transition cursor-pointer">
+            <i class="ri-twitter-fill"></i>
+          </div>
+          <div class="w-8 h-8 bg-gray-800 hover:bg-primary flex items-center justify-center !rounded-lg smooth-transition cursor-pointer">
+            <i class="ri-instagram-fill"></i>
+          </div>
+          <div class="w-8 h-8 bg-gray-800 hover:bg-primary flex items-center justify-center !rounded-lg smooth-transition cursor-pointer">
+            <i class="ri-linkedin-fill"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#home" class="hover:text-white smooth-transition">Home</a></li>
+          <li><a href="#services" class="hover:text-white smooth-transition">Services</a></li>
+          <li><a href="#doctors" class="hover:text-white smooth-transition">Doctors</a></li>
+          <!-- <li><a href="" class="hover:text-white smooth-transition">About Us</a></li> -->
+          <li><a href="#contact" class="hover:text-white smooth-transition">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Services</h3>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#services" class="hover:text-white smooth-transition">General Dentistry</a></li>
+          <li><a href="#services" class="hover:text-white smooth-transition">Cosmetic Dentistry</a></li>
+          <li><a href="#services" class="hover:text-white smooth-transition">Orthodontics</a></li>
+          <li><a href="#services" class="hover:text-white smooth-transition">Oral Surgery</a></li>
+          <li><a href="#services" class="hover:text-white smooth-transition">Emergency Care</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+        <p class="text-gray-400 mb-4">Subscribe to get updates on dental health tips and special offers.</p>
+        <div class="flex space-x-2">
+          <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent text-sm !rounded-lg">
+          <button class="bg-primary text-white px-4 py-2 hover:bg-blue-600 smooth-transition whitespace-nowrap !rounded-button">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400">© 2025 Smile Care. All rights reserved.</p>
+      <div class="flex space-x-6 mt-4 md:mt-0">
+        <a href="https://readdy.link/share/4c684aff75fe8839278ea627bbebaf1e#" class="text-gray-400 hover:text-white smooth-transition">Privacy Policy</a>
+        <a href="https://readdy.link/share/4c684aff75fe8839278ea627bbebaf1e#" class="text-gray-400 hover:text-white smooth-transition">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script type="text/javascript" crossorigin="anonymous" src="./Smile Care - Professional Dental Clinic_files/surveys.js.download"></script><script type="text/javascript" crossorigin="anonymous" src="./DentaCare - Professional Dental Clinic_files/config.js.download"></script><script type="text/javascript" crossorigin="anonymous" src="./DentaCare - Professional Dental Clinic_files/dead-clicks-autocapture.js.download"></script><script id="modal-controls">
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const bookAppointmentBtn = document.getElementById('bookAppointmentBtn');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    const appointmentModal = document.getElementById('appointmentModal');
+    const closeLoginModal = document.getElementById('closeLoginModal');
+    const closeRegisterModal = document.getElementById('closeRegisterModal');
+    const closeAppointmentModal = document.getElementById('closeAppointmentModal');
+    const switchToRegister = document.getElementById('switchToRegister');
+    const switchToLogin = document.getElementById('switchToLogin');
+    const loginFromAppointment = document.getElementById('loginFromAppointment');
+    const registerFromAppointment = document.getElementById('registerFromAppointment');
+    const loginRequired = document.getElementById('loginRequired');
+    const appointmentForm = document.getElementById('appointmentForm');
+    const appointmentService = document.getElementById('appointmentService');
+    const appointmentDoctor = document.getElementById('appointmentDoctor');
+    const appointmentDate = document.getElementById('appointmentDate');
+    const appointmentTime = document.getElementById('appointmentTime');
+    let isLoggedIn = false;
+    loginBtn.addEventListener('click', () => {
+      loginModal.classList.add('active');
+    });
+    registerBtn.addEventListener('click', () => {
+      registerModal.classList.add('active');
+    });
+    bookAppointmentBtn.addEventListener('click', () => {
+      appointmentModal.classList.add('active');
+      loginRequired.classList.add('hidden');
+      appointmentForm.classList.remove('hidden');
+      updateDoctorsList();
+      updateAvailableTimeSlots();
+    });
+    const doctorsData = {
+      'general': ['Dr. Sarah Johnson'],
+      'cosmetic': ['Dr. James Wilson'],
+      'orthodontics': ['Dr. Michael Chen'],
+      'surgery': ['Dr. Emily Rodriguez'],
+      'emergency': ['Dr. Sarah Johnson', 'Dr. Emily Rodriguez']
+    };
+    function updateDoctorsList() {
+      const selectedService = appointmentService.value;
+      const doctorSelect = appointmentDoctor;
+      doctorSelect.innerHTML = '<option value="">Select a doctor</option>';
+      if (selectedService && doctorsData[selectedService]) {
+        doctorsData[selectedService].forEach(doctor => {
+          const option = document.createElement('option');
+          option.value = doctor.toLowerCase().replace(/\s+/g, '-');
+          option.textContent = doctor;
+          doctorSelect.appendChild(option);
+        });
+      }
+    }
+    function updateAvailableTimeSlots() {
+      const timeSelect = appointmentTime;
+      timeSelect.innerHTML = '<option value="">Select time slot</option>';
+      const selectedDate = appointmentDate.value;
+      if (selectedDate) {
+        const slots = generateTimeSlots();
+        slots.forEach(slot => {
+          const option = document.createElement('option');
+          option.value = slot;
+          option.textContent = slot;
+          timeSelect.appendChild(option);
+        });
+      }
+    }
+    function generateTimeSlots() {
+      const slots = [];
+      let startHour = 9;
+      let endHour = 17;
+      for (let hour = startHour; hour < endHour; hour++) {
+        slots.push(`${hour.toString().padStart(2, '0')}:00`);
+        slots.push(`${hour.toString().padStart(2, '0')}:30`);
+      }
+      return slots;
+    }
+    appointmentService.addEventListener('change', updateDoctorsList);
+    appointmentDate.addEventListener('change', updateAvailableTimeSlots);
+    document.getElementById('submitAppointment').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!isLoggedIn) {
+        appointmentForm.classList.add('hidden');
+        loginRequired.classList.remove('hidden');
+        return;
+      }
+      const formData = {
+        service: appointmentService.value,
+        doctor: appointmentDoctor.value,
+        date: appointmentDate.value,
+        time: appointmentTime.value,
+        insurance: {
+          provider: document.getElementById('insuranceProvider').value,
+          number: document.getElementById('insuranceNumber').value
+        },
+        notes: document.getElementById('appointmentNotes').value
+      };
+      const confirmationMessage = document.createElement('div');
+      confirmationMessage.className = 'fixed inset-0 flex items-center justify-center z-50';
+      confirmationMessage.innerHTML = `
+<div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+<div class="text-center">
+<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="ri-check-line text-3xl text-green-500"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Appointment Confirmed!</h3>
+<p class="text-gray-600 mb-6">Your appointment has been successfully scheduled.</p>
+<button class="bg-primary text-white px-6 py-2 rounded-button">Close</button>
+</div>
+</div>
+`;
+      document.body.appendChild(confirmationMessage);
+      confirmationMessage.querySelector('button').onclick = () => {
+        confirmationMessage.remove();
+        appointmentModal.classList.remove('active');
+      };
+    });
+    closeLoginModal.addEventListener('click', () => {
+      loginModal.classList.remove('active');
+    });
+    closeRegisterModal.addEventListener('click', () => {
+      registerModal.classList.remove('active');
+    });
+    closeAppointmentModal.addEventListener('click', () => {
+      appointmentModal.classList.remove('active');
+    });
+    switchToRegister.addEventListener('click', () => {
+      loginModal.classList.remove('active');
+      registerModal.classList.add('active');
+    });
+    switchToLogin.addEventListener('click', () => {
+      registerModal.classList.remove('active');
+      loginModal.classList.add('active');
+    });
+    loginFromAppointment.addEventListener('click', () => {
+      appointmentModal.classList.remove('active');
+      loginModal.classList.add('active');
+    });
+    registerFromAppointment.addEventListener('click', () => {
+      appointmentModal.classList.remove('active');
+      registerModal.classList.add('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        loginModal.classList.remove('active');
+      }
+      if (e.target === registerModal) {
+        registerModal.classList.remove('active');
+      }
+      if (e.target === appointmentModal) {
+        appointmentModal.classList.remove('active');
+      }
+    });
+  });
+</script>
+<script id="smooth-scrolling">
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          const offsetTop = targetSection.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
+<script id="animation-observer">
+  document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+    const animatedElements = document.querySelectorAll('.fade-in');
+    animatedElements.forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+  });
+</script>
+<script>
+  !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+  posthog.init('phc_t9tkQZJiyi2ps9zUYm8TDsL6qXo4YmZx0Ot5rBlAlEd', {
+    api_host: 'https://us.i.posthog.com',
+    autocapture: false,
+    capture_pageview: false,
+    capture_pageleave: false,
+    capture_performance: {
+      web_vitals: false,
+    },
+    rageclick: false,
+  })
+  window.shareKey = 'tq4-x1xinHaUrVNYes2W3w';
+  window.host = 'readdy.ai';
+</script>
+<script src="./DentaCare - Professional Dental Clinic_files/share.js.download"></script>
