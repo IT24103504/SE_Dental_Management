@@ -3,6 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSRF Meta Tags for JavaScript -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Healthcare Management Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -57,12 +60,6 @@
                         <span>Supplier Manager</span>
                     </button>
                 </li>
-                <li>
-                    <button class="nav-item w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg hover:bg-gray-100 transition-colors" data-section="communications">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Communications</span>
-                    </button>
-                </li>
             </ul>
         </nav>
         <div class="p-4 border-t border-gray-200">
@@ -102,6 +99,7 @@
                         <option value="Receptionist">Receptionist</option>
                         <option value="Admin">Admin</option>
                         <option value="Supplier">Supplier</option>
+                        <option value="X-Ray Lab Assistant">X-Ray Lab Assistant</option>
                     </select>
                 </div>
             </div>
@@ -145,47 +143,10 @@
                 </table>
             </div>
         </div>
-
-        <!-- Communications Section -->
-        <div id="communications-section" class="section hidden">
-            <div class="max-w-2xl">
-                <h1 class="text-3xl font-bold text-gray-900">AI-Powered Communications</h1>
-                <p class="text-gray-600 mt-2">Generate professional patient communications using the Gemini API.</p>
-
-                <div class="mt-8 p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-                    <div class="space-y-4">
-                        <div>
-                            <label for="comm-type" class="block text-sm font-medium text-gray-700">Communication Type</label>
-                            <select id="comm-type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
-                                <option>Appointment Reminder</option>
-                                <option>Post-Procedure Follow-up</option>
-                                <option>Billing Inquiry Response</option>
-                                <option>New Patient Welcome</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="comm-notes" class="block text-sm font-medium text-gray-700">Additional Notes (Optional)</label>
-                            <textarea id="comm-notes" rows="4" class="mt-1 shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="e.g., Patient's appointment is on Tuesday at 10 AM. Mention a 24-hour cancellation policy."></textarea>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <button id="generate-draft-btn" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-button text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                            <span class="mr-2">✨ Generate Draft</span>
-                            <div id="loader" class="hidden animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="draft-output-container" class="mt-8 hidden">
-                    <h3 class="text-lg font-semibold text-gray-800">Generated Draft:</h3>
-                    <div id="draft-output" class="mt-2 p-4 bg-gray-100 border border-gray-200 rounded-md text-gray-700 whitespace-pre-wrap"></div>
-                </div>
-            </div>
-        </div>
     </main>
 </div>
 
-<!-- Modals -->
+<!-- User Form Modal -->
 <div id="user-form-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
@@ -237,6 +198,7 @@
                     <option value="Receptionist">Receptionist</option>
                     <option value="Admin">Admin</option>
                     <option value="Supplier">Supplier</option>
+                    <option value="X-Ray Lab Assistant">X-Ray Lab Assistant</option>
                 </select>
             </div>
         </form>
@@ -247,136 +209,101 @@
     </div>
 </div>
 
-<!-- Modals -->
-<div id="user-form-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
-        <div class="p-6 border-t border-gray-200 flex justify-end gap-3">
-            <button id="cancel-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-button font-semibold hover:bg-gray-300">Cancel</button>
-            <button id="save-user-btn" class="bg-primary text-white px-4 py-2 rounded-button font-semibold hover:bg-blue-700">Save User</button>
-        </div>
-    </div>
-</div>
-
+<!-- Delete Confirmation Modal -->
 <div id="delete-confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
         <div class="p-6 text-center">
             <div class="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
                 <i class="ri-alert-line text-3xl text-red-600"></i>
             </div>
-            <h3 id="delete-modal-title" class="text-lg font-medium text-gray-900 mb-2">Confirm Deletion</h3>
+            <h3 id="delete-modal-title" class="text-lg font-medium text-gray-900 mb-2">Confirm Action</h3>
             <p id="delete-modal-message" class="text-sm text-gray-600 mb-6">Are you sure? This action cannot be undone.</p>
         </div>
         <div class="px-6 pb-6 flex justify-center gap-3">
             <button id="cancel-delete-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-button font-semibold hover:bg-gray-300 w-28">Cancel</button>
-            <button id="confirm-delete-btn" class="bg-red-600 text-white px-4 py-2 rounded-button font-semibold hover:bg-red-700 w-28">Delete</button>
+            <button id="confirm-delete-btn" class="bg-red-600 text-white px-4 py-2 rounded-button font-semibold hover:bg-red-700 w-28">Confirm</button>
         </div>
     </div>
 </div>
-
-<!-- Save Confirmation Modal -->
-<div id="save-confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
-        <div class="p-6 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <i class="ri-question-line text-3xl text-blue-600"></i>
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">Confirm New User</h3>
-            <p class="text-sm text-gray-600 mb-6">Are you sure you want to add this user to the system?</p>
-        </div>
-        <div class="px-6 pb-6 flex justify-center gap-3">
-            <button id="cancel-save-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-button font-semibold hover:bg-gray-300 w-28">Cancel</button>
-            <button id="confirm-save-btn" class="bg-primary text-white px-4 py-2 rounded-button font-semibold hover:bg-blue-700 w-28">Confirm</button>
-        </div>
-    </div>
-</div>
-
-<!-- Success Toast Notification -->
-<div id="success-toast" class="fixed bottom-5 right-5 bg-green-600 text-white py-3 px-6 rounded-lg shadow-lg hidden flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 z-50">
-    <i class="ri-check-line text-2xl"></i>
-    <span id="success-message"></span>
-</div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- MOCK DATABASES ---
-        let users = [
-            { id: 1, fullname: "Dr. John Doe", email: "john.doe@clinic.com", type: "Dentist", dob: "1980-05-15", gender: "Male", contact: "123-456-7890", username: "johndoe", password: "password123" },
-            { id: 2, fullname: "Sarah Wilson", email: "sarah.w@email.com", type: "Patient", dob: "1992-08-20", gender: "Female", contact: "234-567-8901", username: "sarahw", password: "password123" },
-            { id: 3, fullname: "Mike Johnson", email: "mike.j@reception.com", type: "Receptionist", dob: "1988-11-30", gender: "Male", contact: "345-678-9012", username: "mikej", password: "password123" },
-            { id: 4, fullname: "Emily Davis", email: "emily.davis@clinic.com", type: "Admin", dob: "1985-02-10", gender: "Female", contact: "456-789-0123", username: "emilyd", password: "password123" },
-            { id: 5, fullname: "Robert Brown", email: "robert@supplies.com", type: "Supplier", dob: "1975-07-25", gender: "Male", contact: "567-890-1234", username: "robertb", password: "password123" },
-            { id: 6, fullname: "Lisa Garcia", email: "lisa.g@reception.com", type: "Receptionist", dob: "1995-03-12", gender: "Female", contact: "678-901-2345", username: "lisag", password: "password123" },
-            { id: 7, fullname: "Dr. Aisha Khan", email: "a.khan@clinic.com", type: "Dentist", dob: "1983-09-05", gender: "Female", contact: "789-012-3456", username: "aishak", password: "password123" },
-            { id: 8, fullname: "Tom Harris", email: "tom.h@email.com", type: "Patient", dob: "2000-01-01", gender: "Male", contact: "890-123-4567", username: "tomh", password: "password123" },
-        ];
+        // --- API URL FOR USERS ---
+        const API_URL = '/api/users';
 
-        let appointments = [
-            { id: 1, dateTime: "2025-10-05T10:00:00", patientName: "Sarah Wilson", patientAge: 33, patientContact: "234-567-8901", dentistName: "Dr. John Doe", note: "Regular check-up and cleaning." },
-            { id: 2, dateTime: "2025-10-05T14:30:00", patientName: "James Lee", patientAge: 45, patientContact: "111-222-3333", dentistName: "Dr. Aisha Khan", note: "Consultation for wisdom tooth." },
-            { id: 3, dateTime: "2025-10-06T11:00:00", patientName: "Maria Garcia", patientAge: 28, patientContact: "444-555-6666", dentistName: "Dr. John Doe", note: "Filling for molar." },
-            { id: 4, dateTime: "2025-10-07T09:00:00", patientName: "David Smith", patientAge: 52, patientContact: "777-888-9999", dentistName: "Dr. Aisha Khan", note: "Follow-up on root canal." },
-            { id: 5, dateTime: "2025-10-08T16:00:00", patientName: "Tom Harris", patientAge: 25, patientContact: "890-123-4567", dentistName: "Dr. John Doe", note: "Initial orthodontic consultation." },
-        ];
-
-        // --- UPDATED SUPPLIER DUMMY DATA ---
-        let suppliers = [
-            { id: 'S001', name: 'Disposable Syringes', quantity: 500, note: '10ml Luer Lock syringes for administering local anesthesia.' },
-            { id: 'S002', name: 'Nitrile Gloves (Box)', quantity: 100, note: 'Box of 100 powder-free, non-sterile, medium-sized gloves.' },
-            { id: 'S003', name: 'Surgical Masks (Box)', quantity: 200, note: 'Box of 50, 3-layer protection masks with ear loops.' },
-            { id: 'S004', name: 'Dental Filling Kit', quantity: 25, note: 'Composite resin kit, A2 Shade, includes bonding agent.' },
-            { id: 'S005', name: 'Autoclave Pouches', quantity: 150, note: 'Self-sealing sterilization bags for dental instruments.' },
-            { id: 'S006', name: 'Dental Bibs (Pack)', quantity: 50, note: 'Pack of 100 water-resistant patient bibs, color blue.' },
-        ];
-
-        let nextUserId = 9;
-        let userToDelete = null, appointmentToDelete = null;
-        let editingUser = null;
-        let userToSave = null;
+        // --- CSRF TOKEN HELPER ---
+        const csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
+        const csrfHeaderName = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
 
         // --- DOM ELEMENTS ---
         const userTableBody = document.getElementById('users-table-body');
-        const userStatsContainer = document.getElementById('user-stats');
         const userModal = document.getElementById('user-form-modal');
         const deleteModal = document.getElementById('delete-confirm-modal');
-        const saveConfirmModal = document.getElementById('save-confirm-modal');
-        const successToast = document.getElementById('success-toast');
-        const successMessage = document.getElementById('success-message');
-        const userModalTitle = document.getElementById('modal-title');
         const userForm = document.getElementById('user-form');
         const userTypeFilter = document.getElementById('user-type-filter');
+        const userStatsContainer = document.getElementById('user-stats');
         const appointmentsGrid = document.getElementById('appointments-grid');
         const suppliersTableBody = document.getElementById('suppliers-table-body');
 
-        // --- RENDER FUNCTIONS ---
-        const renderUsers = () => {
-            const selectedType = userTypeFilter.value;
-            const filteredUsers = selectedType === 'All Users'
-                ? users
-                : users.filter(user => user.type === selectedType);
+        let itemToDelete = { id: null, type: null };
 
-            userTableBody.innerHTML = '';
-            if (filteredUsers.length === 0) {
-                userTableBody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">No users found for this type.</td></tr>';
-            } else {
-                filteredUsers.forEach(user => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                    <td class="p-4 text-sm text-gray-700">${'U' + user.id.toString().padStart(3, '0')}</td>
-                    <td class="p-4 text-sm font-medium text-gray-900">${user.fullname}</td>
-                    <td class="p-4 text-sm text-gray-600">${user.email}</td>
-                    <td class="p-4 text-sm"><span class="px-2 py-1 font-semibold text-xs rounded-full ${getTypeColor(user.type)}">${user.type}</span></td>
-                    <td class="p-4 text-sm">
-                        <button class="edit-btn text-blue-600 hover:text-blue-800 mr-4" data-id="${user.id}"><i class="ri-pencil-fill"></i></button>
-                        <button class="delete-btn text-red-600 hover:text-red-800" data-id="${user.id}"><i class="ri-delete-bin-fill"></i></button>
-                    </td>
-                `;
-                    userTableBody.appendChild(row);
-                });
+
+        // --- MOCK DATABASES for sections not yet connected to backend ---
+        let appointments = [
+            { id: 1, dateTime: "2025-10-05T10:00:00", patientName: "Sarah Wilson", patientAge: 33, patientContact: "234-567-8solomon", dentistName: "Dr. John Doe", note: "Regular check-up and cleaning." },
+            { id: 2, dateTime: "2025-10-05T14:30:00", patientName: "James Lee", patientAge: 45, patientContact: "111-222-3333", dentistName: "Dr. Aisha Khan", note: "Consultation for wisdom tooth." },
+            { id: 3, dateTime: "2025-10-06T11:00:00", patientName: "Maria Garcia", patientAge: 28, patientContact: "444-555-6666", dentistName: "Dr. John Doe", note: "Filling for molar." },
+            { id: 4, dateTime: "2025-10-07T09:00:00", patientName: "David Smith", patientAge: 52, patientContact: "777-888-9999", dentistName: "Dr. Aisha Khan", note: "Follow-up on root canal." },
+        ];
+        let suppliers = [
+            { id: 'S001', name: 'Disposable Syringes', quantity: 500, note: '10ml Luer Lock for anesthesia.' },
+            { id: 'S002', name: 'Nitrile Gloves (Box)', quantity: 100, note: 'Box of 100, powder-free, size M.' },
+            { id: 'S003', name: 'Surgical Masks (Box)', quantity: 200, note: '3-layer protection, box of 50.' },
+            { id: 'S004', name: 'Dental Filling Kit', quantity: 25, note: 'Composite resin, A2 Shade.' },
+        ];
+
+
+        // ---- RENDER FUNCTIONS ----
+        // USER MANAGEMENT (LIVE DATA)
+        const renderUsers = async () => {
+            const selectedType = userTypeFilter.value;
+            let url = API_URL;
+            if (selectedType && selectedType !== 'All Users') {
+                url += `?type=${selectedType}`;
+            }
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const users = await response.json();
+
+                userTableBody.innerHTML = '';
+                if (users.length === 0) {
+                    userTableBody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-gray-500">No users found.</td></tr>';
+                } else {
+                    users.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td class="p-4 text-sm text-gray-700">U${String(user.id).padStart(3, '0')}</td>
+                        <td class="p-4 text-sm font-medium text-gray-900">${user.fullname}</td>
+                        <td class="p-4 text-sm text-gray-600">${user.email}</td>
+                        <td class="p-4 text-sm"><span class="px-2 py-1 font-semibold text-xs rounded-full ${getTypeColor(user.type)}">${user.type}</span></td>
+                        <td class="p-4 text-sm">
+                            <button class="edit-btn text-blue-600 hover:text-blue-800 mr-4" data-id="${user.id}"><i class="ri-pencil-fill"></i></button>
+                            <button class="delete-btn text-red-600 hover:text-red-800" data-id="${user.id}" data-type="user"><i class="ri-delete-bin-fill"></i></button>
+                        </td>
+                    `;
+                        userTableBody.appendChild(row);
+                    });
+                }
+                renderUserStats(users);
+            } catch (error) {
+                userTableBody.innerHTML = `<tr><td colspan="5" class="text-center p-8 text-red-500">Error loading users: ${error.message}</td></tr>`;
+                console.error("Error fetching users:", error);
             }
         };
 
-        const renderUserStats = () => {
+        const renderUserStats = (users) => {
             const stats = users.reduce((acc, user) => {
                 acc[user.type] = (acc[user.type] || 0) + 1;
                 return acc;
@@ -388,14 +315,12 @@
                 const count = stats[type] || 0;
                 const statCard = document.createElement('div');
                 statCard.className = 'bg-white p-4 rounded-lg shadow-sm border border-gray-200';
-                statCard.innerHTML = `
-                <h3 class="text-sm font-medium text-gray-500">${type}s</h3>
-                <p class="text-2xl font-bold text-gray-900">${count}</p>
-            `;
+                statCard.innerHTML = `<h3 class="text-sm font-medium text-gray-500">${type}s</h3><p class="text-2xl font-bold text-gray-900">${count}</p>`;
                 userStatsContainer.appendChild(statCard);
             });
         };
 
+        // APPOINTMENT MANAGEMENT (MOCK DATA)
         const renderAppointments = () => {
             appointmentsGrid.innerHTML = '';
             if (appointments.length === 0) {
@@ -410,11 +335,11 @@
                 const card = document.createElement('div');
                 card.className = 'bg-white p-5 rounded-lg shadow-sm border border-gray-200 relative';
                 card.innerHTML = `
-                    <button class="delete-appointment-btn absolute top-3 right-3 text-gray-400 hover:text-red-600 transition-colors" data-id="${appt.id}">
+                    <button class="delete-btn absolute top-3 right-3 text-gray-400 hover:text-red-600 transition-colors" data-id="${appt.id}" data-type="appointment">
                         <i class="ri-delete-bin-fill text-lg"></i>
                     </button>
                     <div class="mb-4">
-                        <p class="text-xs text-gray-500 font-semibold">APT ID: ${'A' + appt.id.toString().padStart(4, '0')}</p>
+                        <p class="text-xs text-gray-500 font-semibold">APT ID: ${'A' + appt.id.toString().padStart(4, '0')}</td>
                         <p class="text-lg font-bold text-gray-800">${appt.patientName} <span class="text-sm font-normal text-gray-600">(Age ${appt.patientAge})</span></p>
                         <p class="text-sm text-primary font-semibold">with ${appt.dentistName}</p>
                     </div>
@@ -437,26 +362,167 @@
             });
         };
 
-        // --- UPDATED RENDER SUPPLIERS FUNCTION ---
+        // SUPPLIER MANAGEMENT (MOCK DATA)
         const renderSuppliers = () => {
             suppliersTableBody.innerHTML = '';
-            if(suppliers.length === 0) {
+            if (suppliers.length === 0) {
                 suppliersTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-8 text-gray-500">No supplier items found.</td></tr>';
                 return;
             }
             suppliers.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class="p-4 text-sm text-gray-700">${item.id}</td>
-                    <td class="p-4 text-sm font-medium text-gray-900">${item.name}</td>
-                    <td class="p-4 text-sm text-gray-600">${item.quantity}</td>
-                    <td class="p-4 text-sm text-gray-600">${item.note}</td>
-                `;
+                <td class="p-4 text-sm text-gray-700">${item.id}</td>
+                <td class="p-4 text-sm font-medium text-gray-900">${item.name}</td>
+                <td class="p-4 text-sm text-gray-600">${item.quantity}</td>
+                <td class="p-4 text-sm text-gray-600">${item.note}</td>
+            `;
                 suppliersTableBody.appendChild(row);
             });
         };
 
-        // --- UTILITY & MODAL FUNCTIONS ---
+        // ---- MODAL FUNCTIONS ----
+        const openUserModal = async (id = null) => {
+            userForm.reset();
+            document.getElementById('user-id').value = '';
+            document.getElementById('modal-title').textContent = 'Create New User';
+            document.getElementById('password-req-text').style.display = 'block';
+            document.getElementById('user-password').required = true;
+
+            if (id) {
+                document.getElementById('modal-title').textContent = 'Edit User';
+                try {
+                    const response = await fetch(`${API_URL}/${id}`);
+                    if (!response.ok) throw new Error('User not found');
+                    const user = await response.json();
+                    document.getElementById('user-id').value = user.id;
+                    document.getElementById('user-fullname').value = user.fullname;
+                    document.getElementById('user-dob').value = user.dob;
+                    document.getElementById('user-gender').value = user.gender;
+                    document.getElementById('user-contact').value = user.contact;
+                    document.getElementById('user-email').value = user.email;
+                    document.getElementById('user-username').value = user.username;
+                    document.getElementById('user-type').value = user.type;
+                    document.getElementById('user-password').placeholder = 'Leave blank to keep current password';
+                    document.getElementById('password-req-text').style.display = 'none';
+                    document.getElementById('user-password').required = false;
+                } catch (error) {
+                    console.error('Failed to fetch user for editing:', error);
+                }
+            }
+            userModal.classList.remove('hidden');
+        };
+
+        const closeUserModal = () => userModal.classList.add('hidden');
+
+        const openDeleteModal = (id, type) => {
+            itemToDelete = { id, type };
+            const title = document.getElementById('delete-modal-title');
+            const message = document.getElementById('delete-modal-message');
+            if (type === 'user') {
+                title.textContent = 'Delete User';
+                message.textContent = `Are you sure you want to delete user U${String(id).padStart(3, '0')}? This action cannot be undone.`;
+            } else if (type === 'appointment') {
+                title.textContent = 'Cancel Appointment';
+                message.textContent = `Are you sure you want to cancel appointment A${String(id).padStart(4, '0')}?`;
+            }
+            deleteModal.classList.remove('hidden');
+        };
+
+        const closeDeleteModal = () => {
+            itemToDelete = { id: null, type: null };
+            deleteModal.classList.add('hidden');
+        };
+
+        // ---- EVENT LISTENERS ----
+        userTypeFilter.addEventListener('change', renderUsers);
+        document.getElementById('create-user-btn').addEventListener('click', () => openUserModal());
+        document.getElementById('close-modal-btn').addEventListener('click', closeUserModal);
+        document.getElementById('cancel-btn').addEventListener('click', closeUserModal);
+
+        document.getElementById('save-user-btn').addEventListener('click', async () => {
+            if (!userForm.checkValidity()) {
+                userForm.reportValidity();
+                return;
+            }
+
+            const id = document.getElementById('user-id').value;
+            const password = document.getElementById('user-password').value;
+            const user = {
+                fullname: document.getElementById('user-fullname').value,
+                dob: document.getElementById('user-dob').value,
+                gender: document.getElementById('user-gender').value,
+                contact: document.getElementById('user-contact').value,
+                email: document.getElementById('user-email').value,
+                username: document.getElementById('user-username').value,
+                type: document.getElementById('user-type').value,
+                password: (password && password.length > 0) ? password : null
+            };
+
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${API_URL}/${id}` : API_URL;
+            const headers = {
+                'Content-Type': 'application/json',
+                [csrfHeaderName]: csrfToken
+            };
+
+            try {
+                const response = await fetch(url, { method, headers, body: JSON.stringify(user) });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Failed to save user: ${response.status} ${errorText}`);
+                }
+                closeUserModal();
+                renderUsers();
+            } catch (error) {
+                console.error('Error saving user:', error);
+                alert(`Error: ${error.message}`);
+            }
+        });
+
+        // Use a single event listener on a parent element for efficiency
+        document.querySelector('body').addEventListener('click', (e) => {
+            const editBtn = e.target.closest('.edit-btn');
+            if (editBtn) {
+                openUserModal(editBtn.dataset.id);
+                return;
+            }
+
+            const deleteBtn = e.target.closest('.delete-btn');
+            if (deleteBtn) {
+                openDeleteModal(deleteBtn.dataset.id, deleteBtn.dataset.type);
+                return;
+            }
+        });
+
+
+        document.getElementById('cancel-delete-btn').addEventListener('click', closeDeleteModal);
+
+        document.getElementById('confirm-delete-btn').addEventListener('click', async () => {
+            const { id, type } = itemToDelete;
+            if (!id || !type) return;
+
+            if (type === 'user') {
+                try {
+                    const response = await fetch(`${API_URL}/${id}`, {
+                        method: 'DELETE',
+                        headers: { [csrfHeaderName]: csrfToken }
+                    });
+                    if (!response.ok) throw new Error('Failed to delete user');
+                    renderUsers();
+                } catch(error) {
+                    console.error('Error deleting user:', error);
+                    alert(`Error: ${error.message}`);
+                }
+            } else if (type === 'appointment') {
+                // This is mock data, so we just filter the array
+                appointments = appointments.filter(appt => appt.id != id);
+                renderAppointments();
+            }
+            closeDeleteModal();
+        });
+
+        // ---- UTILITY & INITIAL LOAD ----
         const getTypeColor = (type) => {
             const colors = {
                 Patient: 'bg-blue-100 text-blue-800',
@@ -467,166 +533,10 @@
             };
             return colors[type] || 'bg-gray-100 text-gray-800';
         };
-        const openUserModal = (user = null) => {
-            userForm.reset();
-            editingUser = user;
-            userModalTitle.textContent = user ? "Edit User" : "Create New User";
-            document.getElementById('password-req-text').style.display = user ? 'none' : 'block';
-
-            if (user) {
-                document.getElementById('user-fullname').value = user.fullname;
-                document.getElementById('user-dob').value = user.dob;
-                document.getElementById('user-gender').value = user.gender;
-                document.getElementById('user-contact').value = user.contact;
-                document.getElementById('user-email').value = user.email;
-                document.getElementById('user-username').value = user.username;
-                document.getElementById('user-type').value = user.type;
-                document.getElementById('user-password').value = '';
-                document.getElementById('user-password').required = false;
-            } else {
-                document.getElementById('user-password').required = true;
-            }
-            userModal.classList.remove('hidden');
-        };
-        const closeUserModal = () => userModal.classList.add('hidden');
-
-        const openDeleteModal = (id, type) => {
-            if (type === 'user') {
-                userToDelete = id;
-                appointmentToDelete = null;
-                document.getElementById('delete-modal-title').textContent = "Delete User";
-                document.getElementById('delete-modal-message').textContent = `Are you sure you want to delete user U${String(id).padStart(3, '0')}? This action cannot be undone.`;
-            } else if (type === 'appointment') {
-                appointmentToDelete = id;
-                userToDelete = null;
-                document.getElementById('delete-modal-title').textContent = "Cancel Appointment";
-                document.getElementById('delete-modal-message').textContent = `Are you sure you want to cancel appointment A${String(id).padStart(4, '0')}?`;
-            }
-            deleteModal.classList.remove('hidden');
-        };
-        const closeDeleteModal = () => {
-            deleteModal.classList.add('hidden');
-            userToDelete = null;
-            appointmentToDelete = null;
-        };
-
-        const openSaveModal = () => saveConfirmModal.classList.remove('hidden');
-        const closeSaveModal = () => saveConfirmModal.classList.add('hidden');
-
-        const showSuccessToast = (message) => {
-            successMessage.textContent = message;
-            successToast.classList.remove('hidden', 'translate-y-20', 'opacity-0');
-            successToast.classList.add('translate-y-0', 'opacity-100');
-
-            setTimeout(() => {
-                successToast.classList.remove('translate-y-0', 'opacity-100');
-                successToast.classList.add('translate-y-20', 'opacity-0');
-                setTimeout(() => {
-                    successToast.classList.add('hidden');
-                }, 300); // Wait for transition to finish
-            }, 3000);
-        };
-
-        // --- EVENT LISTENERS ---
-        userTypeFilter.addEventListener('change', renderUsers);
-        document.getElementById('create-user-btn').addEventListener('click', () => openUserModal());
-        document.getElementById('close-modal-btn').addEventListener('click', closeUserModal);
-        document.getElementById('cancel-btn').addEventListener('click', closeUserModal);
-
-        document.getElementById('save-user-btn').addEventListener('click', () => {
-            const fullname = document.getElementById('user-fullname').value.trim();
-            const dob = document.getElementById('user-dob').value;
-            const gender = document.getElementById('user-gender').value;
-            const contact = document.getElementById('user-contact').value.trim();
-            const email = document.getElementById('user-email').value.trim();
-            const username = document.getElementById('user-username').value.trim();
-            let password = document.getElementById('user-password').value; // Don't trim password
-            const type = document.getElementById('user-type').value;
-
-            if (!fullname || !dob || !gender || !contact || !email || !username || !type) {
-                // Using a simple alert for mock purposes. A more robust UI would use a modal.
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            const userData = { fullname, dob, gender, contact, email, username, type };
-
-            if (editingUser) {
-                const index = users.findIndex(u => u.id === editingUser.id);
-                if (index !== -1) {
-                    const updatedUser = { ...users[index], ...userData };
-                    if (password) {
-                        updatedUser.password = password;
-                    }
-                    users[index] = updatedUser;
-                }
-                renderUsers();
-                renderUserStats();
-                closeUserModal();
-                showSuccessToast('User updated successfully!');
-            } else {
-                if (!password) {
-                    alert('Password is required for new users.');
-                    return;
-                }
-                userData.password = password;
-                userToSave = userData;
-                openSaveModal();
-            }
-        });
-
-        document.getElementById('cancel-save-btn').addEventListener('click', closeSaveModal);
-
-        document.getElementById('confirm-save-btn').addEventListener('click', () => {
-            if (!userToSave) return;
-
-            users.push({ id: nextUserId++, ...userToSave });
-
-            renderUsers();
-            renderUserStats();
-            closeUserModal();
-            closeSaveModal();
-            showSuccessToast('User added successfully!');
-            userToSave = null; // Clear the temporary data
-        });
-
-        userTableBody.addEventListener('click', (e) => {
-            const editBtn = e.target.closest('.edit-btn');
-            const deleteBtn = e.target.closest('.delete-btn');
-            if (editBtn) openUserModal(users.find(u => u.id === parseInt(editBtn.dataset.id)));
-            if (deleteBtn) openDeleteModal(parseInt(deleteBtn.dataset.id), 'user');
-        });
-
-        appointmentsGrid.addEventListener('click', (e) => {
-            const deleteBtn = e.target.closest('.delete-appointment-btn');
-            if (deleteBtn) openDeleteModal(parseInt(deleteBtn.dataset.id), 'appointment');
-        });
-
-        document.getElementById('cancel-delete-btn').addEventListener('click', closeDeleteModal);
-        document.getElementById('confirm-delete-btn').addEventListener('click', () => {
-            if (userToDelete !== null) {
-                users = users.filter(user => user.id !== userToDelete);
-                renderUsers();
-                renderUserStats();
-            }
-            if (appointmentToDelete !== null) {
-                appointments = appointments.filter(appt => appt.id !== appointmentToDelete);
-                renderAppointments();
-            }
-            closeDeleteModal();
-        });
-
-        // --- INITIAL RENDER & NAVIGATION ---
-        const renderAll = () => {
-            renderUsers();
-            renderUserStats();
-            renderAppointments();
-            renderSuppliers();
-        };
-        renderAll();
 
         const navItems = document.querySelectorAll('.nav-item');
         const sections = document.querySelectorAll('.section');
+
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 const targetId = this.getAttribute('data-section') + '-section';
@@ -636,9 +546,16 @@
                 document.getElementById(targetId).classList.remove('hidden');
             });
         });
+
+        const renderAll = () => {
+            renderUsers();
+            renderAppointments();
+            renderSuppliers();
+        };
+
+        renderAll();
     });
 </script>
 </body>
 </html>
-
 
