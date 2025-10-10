@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileCare • Patient Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+    <main class="content">
+        <section class="header-section">
+            <div class="website-name">SmileCare</div>
+            <div class="profile-section">
+                <div class="profile-card">
+                    <img src="dentistprofile.jpg" alt="Dr. Nilusha Sudharaka" onerror="this.style.display='none'">
+                    <div class="profile-info">
+                        <h3>Dr. Nilusha Sudharaka</h3>
+                        <p>Practical Dentist • Smile Care Dental Clinic</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- X-ray Images Section -->
+        <section class="xray-images full-width">
+            <h3>X-ray Images</h3>
+            <div class="search-patient">
+                <input type="text" id="patient-search" placeholder="Enter patient name to view X-rays">
+                <button class="btn btn-accept" onclick="searchXRayImages()">Search</button>
+            </div>
+            <div id="no-xray-images" style="display: none; text-align: center; color: #7f8c8d; margin: 20px 0;">
+                No X-ray images found for this patient.
+            </div>
+            <div id="xray-images-container" class="xray-images-grid" style="display: none;"></div>
+        </section>
+
+        <!-- Accepted Appointments Management -->
+        <section class="accepted-appointments full-width">
+            <h3>Accepted Appointments Management</h3>
+            <div id="no-accepted" style="display: none; text-align: center; color: #7f8c8d; margin: 20px 0;">
+                No accepted appointments found.
+            </div>
+            <table id="accepted-table" style="display: none;">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Contact No</th>
+                    <th>Appointment Date/Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- New Patients Section -->
+        <section class="upcoming-appointments full-width">
+            <h3>New Patients (Upcoming Appointments)</h3>
+            <div id="no-patients" style="display: none; text-align: center; color: #7f8c8d; margin: 20px 0;">
+                No new patients with accepted appointments.
+            </div>
+            <table id="patients-table" style="display: none;">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Contact No</th>
+                    <th>Reason</th>
+                    <th>Date/Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<!-- Modal for Expanded X-ray Image -->
+<div id="xray-modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modal-image">
+    <div id="modal-caption"></div>
+</div>
+
+<script src="patients.js"></script>
+</body>
+</html>
