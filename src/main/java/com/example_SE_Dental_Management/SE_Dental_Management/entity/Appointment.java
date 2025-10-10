@@ -1,113 +1,43 @@
-package com.example.Dental_Management.Entity;
+package com.smilecare.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "appointments")
 public class Appointment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "patient_name", nullable = false)
+    private String appointmentId;
     private String patientName;
+    private String patientGender;
+    private Integer patientAge;
+    private String patientContact;
+    private String notes;
+    private LocalDateTime appointmentDateTime;
+    private String status;
+    private LocalDateTime createdDate;
 
-    @Column(name = "patient_email", nullable = false)
-    private String patientEmail;
+    // Getters and Setters
+    public String getAppointmentId() { return appointmentId; }
+    public void setAppointmentId(String appointmentId) { this.appointmentId = appointmentId; }
 
-    @Column(name = "patient_phone", nullable = false)
-    private String patientPhone;
+    public String getPatientName() { return patientName; }
+    public void setPatientName(String patientName) { this.patientName = patientName; }
 
-    @Column(name = "dentist_name", nullable = false)
-    private String dentistName;
+    public String getPatientGender() { return patientGender; }
+    public void setPatientGender(String patientGender) { this.patientGender = patientGender; }
 
-    @Column(name = "appointment_date", nullable = false)
-    private LocalDateTime appointmentDate;
+    public Integer getPatientAge() { return patientAge; }
+    public void setPatientAge(Integer patientAge) { this.patientAge = patientAge; }
 
-    @Column(name = "status", nullable = false)
-    private String status; // CONFIRMED, PENDING, CANCELLED
+    public String getPatientContact() { return patientContact; }
+    public void setPatientContact(String patientContact) { this.patientContact = patientContact; }
 
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 
-    public Appointment() {}
+    public LocalDateTime getAppointmentDateTime() { return appointmentDateTime; }
+    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) { this.appointmentDateTime = appointmentDateTime; }
 
-    public Appointment(Long id, String patientName, String patientEmail, String patientPhone, String dentistName, LocalDateTime appointmentDate, String status) {
-        this.id = id;
-        this.patientName = patientName;
-        this.patientEmail = patientEmail;
-        this.patientPhone = patientPhone;
-        this.dentistName = dentistName;
-        this.appointmentDate = appointmentDate;
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    public String getPatientEmail() {
-        return patientEmail;
-    }
-
-    public void setPatientEmail(String patientEmail) {
-        this.patientEmail = patientEmail;
-    }
-
-    public String getPatientPhone() {
-        return patientPhone;
-    }
-
-    public void setPatientPhone(String patientPhone) {
-        this.patientPhone = patientPhone;
-    }
-
-    public String getDentistName() {
-        return dentistName;
-    }
-
-    public void setDentistName(String dentistName) {
-        this.dentistName = dentistName;
-    }
-
-    public LocalDateTime getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(LocalDateTime appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "id=" + id +
-                ", patientName='" + patientName + '\'' +
-                ", patientEmail='" + patientEmail + '\'' +
-                ", patientPhone='" + patientPhone + '\'' +
-                ", dentistName='" + dentistName + '\'' +
-                ", appointmentDate=" + appointmentDate +
-                ", status='" + status + '\'' +
-                '}';
-    }
+    public LocalDateTime getCreatedDate() { return createdDate; }
+    public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }
 }
