@@ -8,6 +8,7 @@ This is a full-stack web application designed to automate and optimize the daily
 Core Features
 
  1.Patient Appointment Booking: Allows new users to register and patients to book, view, and manage their appointments online.
+ 
  2.Staff Appointment Management: Enables Dentists and Receptionists to view, approve, or reject incoming appointment requests.
  3.X-Ray Management: A dedicated interface for X-ray Lab Assistants to upload and manage dental X-ray images, which are then accessible to dentists.
  4.Supply Management: Allows clinic staff to add, update, delete, and track the inventory of dental supplies.
